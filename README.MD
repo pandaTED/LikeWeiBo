@@ -1,6 +1,7 @@
 ###这是我正在写的仿微博网站，使用java语言
 
 ####开发环境
+    操作系统：Ubuntu
     开发工具：IDEA
     框架：Spring，Spring MVC，MyBatis
     数据库：mysql
