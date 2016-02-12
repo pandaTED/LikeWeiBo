@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <typeAlias type="cn.panda.domain.User" alias="user"/>
+        <typeAlias type="cn.panda.domain.WeiBo" alias="weibo"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="cn/panda/domain/mapper/userMapper.xml"/>
+        <mapper resource="cn/panda/domain/mapper/WeiBoMapper.xml"/>
+    </mappers>
+
+
+</configuration>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置c3p0数据库连接池-->
+    <bean id="comboPooledDataSourceId" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/WeiBo"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <!--配置sqlsessionFactoryBean，目的：加载mybatis配置文件和映射文件，即替代Mybatis工具类的作用-->
+    <bean id="sqlSessionFactoryBeanID" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="dataSource" ref="comboPooledDataSourceId"/>        <!--引用了数据源-->
+    </bean>
+
+    <!--配置mybatis的事务管理器，即因为mybatis底层用的是jdbc事务管理器。所以在这里依然配置JDBC事务管理器-->
+    <bean id="dataSourceTransactionManagerID" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="comboPooledDataSourceId"/>         <!--引用了数据源-->
+    </bean>
+
+    <!--配置事务通知，即让哪些方法需要事务支持-->
+    <tx:advice id="tx" transaction-manager="dataSourceTransactionManagerID">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置事务切面，即让哪些包下的类需要事务-->
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* cn.panda.dao.*.*(..))"/>
+        <aop:advisor advice-ref="tx" pointcut-ref="pointcut"/>
+    </aop:config>
+
+    <!--通知springioc容器这些注解的作用-->
+    <context:annotation-config/>
+
+    <!--注册DAO-->
+    <bean id="userDaoId" class="cn.panda.dao.impl.UserDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"/>
+    </bean>
+
+    <bean id="weiBoDaoId" class="cn.panda.dao.impl.WeiBoDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryBeanID"/>
+    </bean>
+
+
+    <!--注册service-->
+    <bean id="userServiceId" class="cn.panda.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDaoId"/>
+    </bean>
+
+    <bean id="weiBoServiceId" class="cn.panda.service.impl.WeiBoServiceImpl">
+        <property name="WeiBoDao" ref="weiBoDaoId"/>
+    </bean>
+
+</beans>

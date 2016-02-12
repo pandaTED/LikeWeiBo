@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--配置mapper的命名空间-->
+<mapper namespace="cn.panda.domain.User">
+    <!--配置resultMap-->
+    <resultMap type="user" id="userMap">
+        <id property="id" column="ID"/>
+        <result property="username" column="USERNAME"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="name" column="NAME"/>
+        <result property="registerDate" column="REGISTERDATE"/>
+    </resultMap>
+
+
+    <!--配置dao里的方法-->
+    <!--新增-->
+    <insert id="addUser" parameterType="user">
+        INSERT INTO W_USER (ID,USERNAME,PASSWORD,NAME,REGISTERDATE) VALUES
+        (#{id},#{username},#{password},#{name},#{registerDate})
+    </insert>
+    <!--用用户名和密码查询-->
+    <select id="findByUsernameAndPassword" parameterType="cn.panda.domain.User" resultType="cn.panda.domain.User">
+        /*parameterType="String"*/
+        SELECT * FROM W_USER WHERE USERNAME = #{username} AND PASSWORD = #{password}
+    </select>
+    <!--查询所有-->
+    <select id="findAll" resultType="user">
+        SELECT * FROM W_USER
+    </select>
+    <!--findById-->
+    <select id="findById" parameterType="String" resultType="user">
+        SELECT * FROM W_USER WHERE ID = #{id}
+    </select>
+    <!--delectById-->
+    <delete id="deleteById" parameterType="String">
+        DELETE FROM W_USER WHERE ID = #{id}
+    </delete>
+    <!--updateUser-->
+    <update id="update" parameterType="user">
+        UPDATE W_USER SET USERNAME = #{username},PASSWORD = #{password},NAME = #{name} WHERE id = #{id}
+    </update>
+</mapper>
