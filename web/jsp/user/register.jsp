@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/style/css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>

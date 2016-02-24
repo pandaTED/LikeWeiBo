@@ -11,18 +11,18 @@
 <html>
 <head>
     <title>微博首页</title>
-    <link rel="stylesheet" href="/style/css.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css.css"/>
 </head>
 <body>
 <%--微博用户列表--%>
 <h5>微博用户列表</h5>
 <c:forEach var="user" items="${userList}" varStatus="status">
     <font color="red">${status.count}</font>&emsp;&emsp;${user.name}&emsp;&emsp;<fmt:formatDate
-        value="${user.registerDate}" pattern="yyyy-MM-dd"/><br/>
+        value="${user.registerDate}" pattern="yyyy-MM-dd  HH:mm:ss"/><br/>
 </c:forEach>
 
 <%--发微博模块--%>
-<h5>发微博了模块,当前用户：<font color="red">${user.name}</font></h5>
+<h5>发微博了模块,当前用户：<font color="red">${user.name}</font>&emsp;&emsp;<a href="logout.do">注销</a></h5>
 
 <form action="FaWeiBo.do" method="post">
     <textarea cols="30" rows="5" name="text"></textarea><br>

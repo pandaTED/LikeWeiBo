@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>userlist</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css.css"/>
 </head>
 <body>
 <c:forEach var="user" items="${userlist}">

@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>success</title>
-    <link rel="stylesheet" href="/style/css.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css.css"/>
 </head>
 <body>
 <h1>success</h1>

@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>detail</title>
-    <link rel="stylesheet" href="/style/css.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/css.css"/>
 </head>
 <body>
 <h1>编辑</h1>

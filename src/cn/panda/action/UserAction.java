@@ -81,4 +81,13 @@ public class UserAction {
         userService.update(user);
         return "redirect:findAll.do";
     }
+
+    @RequestMapping(value = "logout.do")
+    public String logout(HttpSession session){
+         session.removeAttribute("user");
+
+
+        return "/user/login";
+    }
+
 }

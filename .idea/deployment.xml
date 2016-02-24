@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="PublishConfigData" serverName="my_local_codes_host" uploadOnCheckin="2ef7de88-2db0-4929-8c1e-f678290b5bca">
+    <serverData>
+      <paths name="my_local_codes_host">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
     <option name="myUploadOnCheckinName" value="my_local_codes_host" />
   </component>
 </project>
